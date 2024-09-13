@@ -5,6 +5,7 @@ import Contact from "../pages/Contact.js";
 import Login from "../pages/Login.js";
 import Register from "../pages/Register.js";
 import { adminPaths } from "./adminRoutes.js";
+import { ReactNode } from "react";
 
 const router = createBrowserRouter([
   {
