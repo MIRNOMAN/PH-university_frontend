@@ -1,6 +1,8 @@
 import { Layout, Menu } from "antd";
 import { adminPaths } from "../../routes/adminRoutes";
 import { SidebarGenaretor } from "../../utils/sidebarItemGenaretor";
+import { facultyPaths } from "../../routes/facultyRoutes";
+import { studentPaths } from "../../routes/studentRoutes";
 
 const { Sider } = Layout;
 
@@ -11,7 +13,7 @@ const userRole = {
 };
 
 const Sidebar = () => {
-  const role = "admin";
+  const role = "faculty";
   let sidebarItems;
 
   switch (role) {
@@ -19,10 +21,10 @@ const Sidebar = () => {
       sidebarItems = SidebarGenaretor(adminPaths, userRole.ADMIN);
       break;
     case userRole.FACULTY:
-      sidebarItems = SidebarGenaretor(adminPaths, userRole.FACULTY);
+      sidebarItems = SidebarGenaretor(facultyPaths, userRole.FACULTY);
       break;
     case userRole.STUDENT:
-      sidebarItems = SidebarGenaretor(adminPaths, userRole.STUDENT);
+      sidebarItems = SidebarGenaretor(studentPaths, userRole.STUDENT);
       break;
 
     default:

@@ -8,7 +8,7 @@ export const studentPaths = [
     element: <StudentDashboard />,
   },
   {
-    name: "Offered Courses",
+    name: "Offered courses",
     path: "offered-courses",
     element: <StudentOfferedCourse />,
   },
