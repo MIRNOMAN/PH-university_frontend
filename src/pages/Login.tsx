@@ -7,19 +7,23 @@ const Login = () => {
 
   const [login, { data, error }] = useLoginMutation();
 
+  console.log("data =>", data);
+  console.log(" error =>", error);
+
   const onSubmit = (data) => {
     const userInfo = {
-      id: data.id,
+      id: data.userId,
       password: data.password,
     };
     login(userInfo);
   };
+
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label htmlFor="id">ID : </label>
-          <input type="text" id="id" {...register("id")} />
+          <input type="text" id="id" {...register("userId")} />
         </div>
         <div>
           <label htmlFor="password">Password : </label>
