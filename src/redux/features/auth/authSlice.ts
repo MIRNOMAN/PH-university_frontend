@@ -5,7 +5,7 @@ type TAuthState = {
   token: null | string;
 };
 
-const initialState = {
+const initialState: TAuthState = {
   user: null,
   token: null,
 };
@@ -25,3 +25,6 @@ const authSlice = createSlice({
     },
   },
 });
+
+export const { setUser, logout } = authSlice.actions;
+export default authSlice.reducer;
