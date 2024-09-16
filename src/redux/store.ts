@@ -9,10 +9,12 @@ const persistConfig = {
   storage,
 };
 
+const persistAuthReducer = persistReducer(persistConfig, authReducer);
+
 export const store = configureStore({
   reducer: {
     [baseApi.reducerPath]: baseApi.reducer,
-    auth: authReducer,
+    auth: persistAuthReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(baseApi.middleware),
@@ -22,3 +24,5 @@ export const store = configureStore({
 export type RootState = ReturnType<typeof store.getState>;
 // Inferred type: {posts: PostsState, comments: CommentsState, users: UsersState}
 export type AppDispatch = typeof store.dispatch;
+
+export const persistor = persistStore(store);
