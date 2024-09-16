@@ -1,27 +1,37 @@
 import { Button } from "antd";
-import { useForm } from "react-hook-form";
+import { FieldValues, useForm } from "react-hook-form";
 import { useLoginMutation } from "../redux/features/auth/authApi";
 import { useDispatch } from "react-redux";
-import { setUser } from "../redux/features/auth/authSlice";
+import { setUser, Tuser } from "../redux/features/auth/authSlice";
 import { verifyToken } from "../utils/verifyToken";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const Login = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const { register, handleSubmit } = useForm();
 
-  const [login, { error }] = useLoginMutation();
+  const [login] = useLoginMutation();
 
-  const onSubmit = async (data) => {
-    const userInfo = {
-      id: data.userId,
-      password: data.password,
-    };
-    const res = await login(userInfo).unwrap();
+  const onSubmit = async (data: FieldValues) => {
+    const toastId = toast.loading("Logging in");
+    try {
+      const userInfo = {
+        id: data.userId,
+        password: data.password,
+      };
+      const res = await login(userInfo).unwrap();
 
-    const user = verifyToken(res.data.accessToken);
+      const user = verifyToken(res.data.accessToken) as Tuser;
 
-    dispatch(setUser({ user: user, token: res.data.accessToken }));
+      dispatch(setUser({ user: user, token: res.data.accessToken }));
+      toast.success("User logged", { id: toastId, duration: 2000 });
+      navigate(`/${user.role}/dashboard`);
+    } catch (error) {
+      toast.error("something went wrong", { id: toastId, duration: 2000 });
+    }
   };
 
   return (
