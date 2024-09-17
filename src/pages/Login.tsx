@@ -6,12 +6,13 @@ import { setUser, Tuser } from "../redux/features/auth/authSlice";
 import { verifyToken } from "../utils/verifyToken";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import PHForm from "../components/form/PHForm";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { register, handleSubmit } = useForm();
+  const { register } = useForm();
 
   const [login] = useLoginMutation();
 
@@ -36,7 +37,7 @@ const Login = () => {
 
   return (
     <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <PHForm onSubmit={onSubmit}>
         <div>
           <label htmlFor="id">ID : </label>
           <input type="text" id="id" {...register("userId")} />
@@ -46,7 +47,7 @@ const Login = () => {
           <input type="text" id="id" {...register("password")} />
         </div>
         <Button htmlType="submit">Login</Button>
-      </form>
+      </PHForm>
     </div>
   );
 };
