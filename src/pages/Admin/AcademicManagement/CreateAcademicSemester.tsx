@@ -1,8 +1,19 @@
+import { Button } from "antd";
+import PHForm from "../../../components/form/PHForm";
+import PHInput from "../../../components/form/PHInput";
+import { FieldValues, SubmitErrorHandler } from "react-hook-form";
+
 const CreateAcademicSemester = () => {
+  const onsubmit: SubmitErrorHandler<FieldValues> = (data) => {
+    console.log(data);
+  };
   return (
-    <div>
-      <h1>This is CreateAcademicSemester</h1>
-    </div>
+    <form>
+      <PHForm onSubmit={onsubmit}>
+        <PHInput type="text" name="name" />
+        <Button htmlType="submit">Submit</Button>
+      </PHForm>
+    </form>
   );
 };
 
