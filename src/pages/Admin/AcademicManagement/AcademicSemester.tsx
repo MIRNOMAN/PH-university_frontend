@@ -1,4 +1,4 @@
-import { Table, TableColumnsType, TableProps } from "antd";
+import { Button, Table, TableColumnsType, TableProps } from "antd";
 import { useGetAllSemesterQuery } from "../../../redux/features/admin/academicManagementApi";
 import { TAcademicSemester } from "../../../types/AcademicManagement-type";
 import { useState } from "react";
@@ -36,72 +36,87 @@ const AcademicSemester = () => {
     })
   );
 
-  const columns: TableColumnsType<DataType> = [
+  const columns: TableColumnsType<TTableData> = [
     {
       title: "Name",
+      key: "name",
       dataIndex: "name",
-      showSorterTooltip: { target: "full-header" },
       filters: [
         {
-          text: "Joe",
-          value: "Joe",
+          text: "Autumn",
+          value: "Autumn",
         },
         {
-          text: "Jim",
-          value: "Jim",
+          text: "Fall",
+          value: "Fall",
         },
         {
-          text: "Submenu",
-          value: "Submenu",
-          children: [
-            {
-              text: "Green",
-              value: "Green",
-            },
-            {
-              text: "Black",
-              value: "Black",
-            },
-          ],
+          text: "Summer",
+          value: "Summer",
         },
       ],
-      // specify the condition of filtering result
-      // here is that finding the name started with `value`
-      onFilter: (value, record) => record.name.indexOf(value as string) === 0,
-      sorter: (a, b) => a.name.length - b.name.length,
-      sortDirections: ["descend"],
     },
     {
-      title: "Age",
-      dataIndex: "age",
-      defaultSortOrder: "descend",
-      sorter: (a, b) => a.age - b.age,
-    },
-    {
-      title: "Address",
-      dataIndex: "address",
+      title: "Year",
+      key: "year",
+      dataIndex: "year",
       filters: [
         {
-          text: "London",
-          value: "London",
+          text: "2024",
+          value: "2024",
         },
         {
-          text: "New York",
-          value: "New York",
+          text: "2025",
+          value: "2025",
+        },
+        {
+          text: "2026",
+          value: "2026",
         },
       ],
-      onFilter: (value, record) =>
-        record.address.indexOf(value as string) === 0,
+    },
+    {
+      title: "Start Month",
+      key: "startMonth",
+      dataIndex: "startMonth",
+    },
+    {
+      title: "End Month",
+      key: "endMonth",
+      dataIndex: "endMonth",
+    },
+    {
+      title: "Action",
+      key: "x",
+      render: () => {
+        return (
+          <div>
+            <Button>Update</Button>
+          </div>
+        );
+      },
     },
   ];
 
-  const onChange: TableProps<DataType>["onChange"] = (
-    pagination,
+  const onChange: TableProps<TTableData>["onChange"] = (
+    _pagination,
     filters,
-    sorter,
+    _sorter,
     extra
   ) => {
-    console.log("params", pagination, filters, sorter, extra);
+    if (extra.action === "filter") {
+      const queryParams: TQueryParam[] = [];
+
+      filters.name?.forEach((item) =>
+        queryParams.push({ name: "name", value: item })
+      );
+
+      filters.year?.forEach((item) =>
+        queryParams.push({ name: "year", value: item })
+      );
+
+      setParams(queryParams);
+    }
   };
 
   return (
