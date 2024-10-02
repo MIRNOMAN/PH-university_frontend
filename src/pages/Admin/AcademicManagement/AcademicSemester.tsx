@@ -1,8 +1,19 @@
-import { Table } from "antd";
+import { Table, TableColumnsType, TableProps } from "antd";
 import { useGetAllSemesterQuery } from "../../../redux/features/admin/academicManagementApi";
 
+interface DataType {
+  key: React.Key;
+  name: string;
+  age: number;
+  address: string;
+}
+
 const AcademicSemester = () => {
-  const { data } = useGetAllSemesterQuery(undefined);
+  const {
+    data: semesterData,
+    isLoading,
+    isFetching,
+  } = useGetAllSemesterQuery(params);
   const columns: TableColumnsType<DataType> = [
     {
       title: "Name",
