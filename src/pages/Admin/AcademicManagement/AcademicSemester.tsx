@@ -4,13 +4,6 @@ import { TAcademicSemester } from "../../../types/AcademicManagement-type";
 import { useState } from "react";
 import { TQueryParam } from "../../../types/global";
 
-interface DataType {
-  key: React.Key;
-  name: string;
-  age: number;
-  address: string;
-}
-
 export type TTableData = Pick<
   TAcademicSemester,
   "name" | "year" | "startMonth" | "endMonth"
@@ -120,11 +113,11 @@ const AcademicSemester = () => {
   };
 
   return (
-    <Table<DataType>
+    <Table
+      loading={isFetching}
       columns={columns}
       dataSource={tableData}
       onChange={onChange}
-      showSorterTooltip={{ target: "sorter-icon" }}
     />
   );
 };

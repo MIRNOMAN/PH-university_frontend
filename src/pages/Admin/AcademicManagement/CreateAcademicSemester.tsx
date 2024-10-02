@@ -21,7 +21,7 @@ const CreateAcademicSemester = () => {
 
   const onsubmit: SubmitErrorHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Creating...");
-    const name = SemesterOptions[Number(data.name) - 1].label;
+    const name = SemesterOptions[Number(data.name) - 1]?.label;
 
     const semesterData = {
       name,
@@ -33,6 +33,7 @@ const CreateAcademicSemester = () => {
     try {
       const res = (await addAcademicSemester(semesterData)) as TResponse;
       console.log(res);
+
       if (res.error) {
         toast.error(res.error.data.message, { id: toastId });
       } else {
