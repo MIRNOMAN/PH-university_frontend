@@ -1,5 +1,8 @@
 import { Table, TableColumnsType, TableProps } from "antd";
 import { useGetAllSemesterQuery } from "../../../redux/features/admin/academicManagementApi";
+import { TAcademicSemester } from "../../../types/AcademicManagement-type";
+import { useState } from "react";
+import { TQueryParam } from "../../../types/global";
 
 interface DataType {
   key: React.Key;
@@ -8,12 +11,31 @@ interface DataType {
   address: string;
 }
 
+export type TTableData = Pick<
+  TAcademicSemester,
+  "name" | "year" | "startMonth" | "endMonth"
+>;
+
 const AcademicSemester = () => {
+  const [params, setParams] = useState<TQueryParam[] | undefined>(undefined);
   const {
     data: semesterData,
     isLoading,
     isFetching,
   } = useGetAllSemesterQuery(params);
+
+  console.log({ isLoading, isFetching });
+
+  const tableData = semesterData?.data?.map(
+    ({ _id, name, startMonth, endMonth, year }) => ({
+      key: _id,
+      name,
+      startMonth,
+      endMonth,
+      year,
+    })
+  );
+
   const columns: TableColumnsType<DataType> = [
     {
       title: "Name",
