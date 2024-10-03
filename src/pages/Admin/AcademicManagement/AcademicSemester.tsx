@@ -111,7 +111,6 @@ const AcademicSemester = () => {
       setParams(queryParams);
     }
   };
-
   return (
     <Table
       loading={isFetching}

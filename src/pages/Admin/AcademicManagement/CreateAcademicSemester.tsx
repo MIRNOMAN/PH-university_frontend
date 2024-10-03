@@ -1,6 +1,6 @@
 import { Button, Col, Flex } from "antd";
 import PHForm from "../../../components/form/PHForm";
-import { FieldValues, SubmitErrorHandler } from "react-hook-form";
+import { FieldValues, SubmitHandler } from "react-hook-form";
 import PHSelect from "../../../components/form/PHSelect";
 import { SemesterOptions } from "../../../constants/semesters";
 import { monthOptions } from "../../../constants/global";
@@ -9,6 +9,14 @@ import { academicSemesterSchema } from "../../../schemas/academicManagement.sche
 import { useAddAcademicSemesterMutation } from "../../../redux/features/admin/academicManagementApi";
 import { toast } from "sonner";
 import { TResponse } from "../../../types/global";
+
+type AcademicSemesterData = {
+  name: string;
+  code: string;
+  year: string;
+  startMonth: string;
+  endMonth: string;
+};
 
 const currentYear = new Date().getFullYear();
 const yearOptions = [0, 1, 2, 3, 4].map((number) => ({
@@ -19,9 +27,10 @@ const yearOptions = [0, 1, 2, 3, 4].map((number) => ({
 const CreateAcademicSemester = () => {
   const [addAcademicSemester] = useAddAcademicSemesterMutation();
 
-  const onsubmit: SubmitErrorHandler<FieldValues> = async (data) => {
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Creating...");
-    const name = SemesterOptions[Number(data.name) - 1]?.label;
+
+    const name = SemesterOptions[Number(data?.name) - 1]?.label;
 
     const semesterData = {
       name,
@@ -30,10 +39,12 @@ const CreateAcademicSemester = () => {
       startMonth: data.startMonth,
       endMonth: data.endMonth,
     };
-    try {
-      const res = (await addAcademicSemester(semesterData)) as TResponse;
-      console.log(res);
 
+    try {
+      const res = (await addAcademicSemester(
+        semesterData
+      )) as TResponse<AcademicSemesterData>;
+      console.log(res);
       if (res.error) {
         toast.error(res.error.data.message, { id: toastId });
       } else {
@@ -48,7 +59,7 @@ const CreateAcademicSemester = () => {
     <Flex justify="center" align="center">
       <Col span={6}>
         <PHForm
-          onSubmit={onsubmit}
+          onSubmit={onSubmit}
           resolver={zodResolver(academicSemesterSchema)}
         >
           <PHSelect label="Name" name="name" options={SemesterOptions} />
@@ -59,6 +70,7 @@ const CreateAcademicSemester = () => {
             options={monthOptions}
           />
           <PHSelect label="End Month" name="endMonth" options={monthOptions} />
+
           <Button htmlType="submit">Submit</Button>
         </PHForm>
       </Col>
