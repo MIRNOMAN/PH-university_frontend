@@ -1,5 +1,5 @@
 import { Button, Table, TableColumnsType, TableProps } from "antd";
-import { useGetAllSemesterQuery } from "../../../redux/features/admin/academicManagementApi";
+import { useGetAllSemestersQuery } from "../../../redux/features/admin/academicManagementApi";
 import { TAcademicSemester } from "../../../types/AcademicManagement-type";
 import { useState } from "react";
 import { TQueryParam } from "../../../types/global";
@@ -15,7 +15,7 @@ const AcademicSemester = () => {
     data: semesterData,
     isLoading,
     isFetching,
-  } = useGetAllSemesterQuery(params);
+  } = useGetAllSemestersQuery(params);
 
   console.log({ isLoading, isFetching });
 
