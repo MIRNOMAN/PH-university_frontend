@@ -1,4 +1,5 @@
-import { TQueryParam } from "../../../types/global";
+import { TQueryParam, TResponseRedux } from "../../../types/global";
+import { TStudent } from "../../../types/userManagement.type";
 import { baseApi } from "../../api/baseApi";
 
 const userManagementApi = baseApi.injectEndpoints({
@@ -27,7 +28,15 @@ const userManagementApi = baseApi.injectEndpoints({
         };
       },
     }),
+    addStudent: builder.mutation({
+      query: (data) => ({
+        url: "/users/create-student",
+        method: "POST",
+        body: data,
+      }),
+    }),
   }),
 });
 
-export const { useGetAllStudentsQuery } = userManagementApi;
+export const { useAddStudentMutation, useGetAllStudentsQuery } =
+  userManagementApi;
