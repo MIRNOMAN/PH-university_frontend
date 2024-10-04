@@ -1,3 +1,9 @@
+import {
+  useGetAcademicDepartmentsQuery,
+  useGetAllSemestersQuery,
+} from "../../redux/features/admin/academicManagementApi";
+import { useAddStudentMutation } from "../../redux/features/admin/userManagement.api";
+
 const studentDummyData = {
   password: "student123",
   student: {
@@ -75,6 +81,26 @@ const studentDefaultValues = {
 };
 
 const CreateStudent = () => {
+  const [addStudent, { data, error }] = useAddStudentMutation();
+
+  console.log({ data, error });
+
+  const { data: sData, isLoading: sIsLoading } =
+    useGetAllSemestersQuery(undefined);
+
+  const { data: dData, isLoading: dIsLoading } =
+    useGetAcademicDepartmentsQuery(undefined);
+
+  const semesterOptions = sData?.data?.map((item) => ({
+    value: item._id,
+    label: `${item.name} ${item.year}`,
+  }));
+
+  const departmentOptions = dData?.data?.map((item) => ({
+    value: item._id,
+    label: item.name,
+  }));
+
   return (
     <div>
       <h1>This is student deashboard</h1>
