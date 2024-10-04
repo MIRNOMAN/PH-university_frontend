@@ -2,7 +2,7 @@ import { Button, Col, Flex } from "antd";
 import PHForm from "../../../components/form/PHForm";
 import { FieldValues, SubmitHandler } from "react-hook-form";
 import PHSelect from "../../../components/form/PHSelect";
-import { SemesterOptions } from "../../../constants/semesters";
+import { semesterOptions } from "../../../constants/semesters";
 import { monthOptions } from "../../../constants/global";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { academicSemesterSchema } from "../../../schemas/academicManagement.schema";
@@ -30,7 +30,7 @@ const CreateAcademicSemester = () => {
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
     const toastId = toast.loading("Creating...");
 
-    const name = SemesterOptions[Number(data?.name) - 1]?.label;
+    const name = semesterOptions[Number(data?.name) - 1]?.label;
 
     const semesterData = {
       name,
@@ -62,7 +62,7 @@ const CreateAcademicSemester = () => {
           onSubmit={onSubmit}
           resolver={zodResolver(academicSemesterSchema)}
         >
-          <PHSelect label="Name" name="name" options={SemesterOptions} />
+          <PHSelect label="Name" name="name" options={semesterOptions} />
           <PHSelect label="Year" name="year" options={yearOptions} />
           <PHSelect
             label="Start Month"
