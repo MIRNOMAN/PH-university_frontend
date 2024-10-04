@@ -1,3 +1,4 @@
+import { FieldValues, SubmitHandler } from "react-hook-form";
 import {
   useGetAcademicDepartmentsQuery,
   useGetAllSemestersQuery,
@@ -100,6 +101,24 @@ const CreateStudent = () => {
     value: item._id,
     label: item.name,
   }));
+
+  const onSubmit: SubmitHandler<FieldValues> = (data) => {
+    const studentData = {
+      password: "student123",
+      student: data,
+    };
+
+    const formData = new FormData();
+
+    formData.append("data", JSON.stringify(studentData));
+    formData.append("file", data.image);
+
+    addStudent(formData);
+
+    //! This is for development
+    //! Just for checking
+    console.log(Object.fromEntries(formData));
+  };
 
   return (
     <div>
