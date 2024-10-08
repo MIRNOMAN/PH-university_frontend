@@ -2,7 +2,7 @@ import { useState } from "react";
 import { TStudent } from "../../../types/userManagement.type";
 import { TQueryParam } from "../../../types/global";
 import { useGetAllStudentsQuery } from "../../../redux/features/admin/userManagement.api";
-import { Button, Space, TableColumnsType } from "antd";
+import { Button, Space, TableColumnsType, TableProps } from "antd";
 import { Link } from "react-router-dom";
 
 export type TTableData = Pick<
@@ -77,6 +77,28 @@ const StudentData = () => {
       width: '1%',
     },
   ];
+
+
+  const onChange: TableProps<TTableData>['onChange'] = (
+    _pagination,
+    filters,
+    _sorter,
+    extra
+  ) => {
+    if (extra.action === 'filter') {
+      const queryParams: TQueryParam[] = [];
+
+      filters.name?.forEach((item) =>
+        queryParams.push({ name: 'name', value: item })
+      );
+
+      filters.year?.forEach((item) =>
+        queryParams.push({ name: 'year', value: item })
+      );
+
+      setParams(queryParams);
+    }
+  };
 
     return (
         <div>
