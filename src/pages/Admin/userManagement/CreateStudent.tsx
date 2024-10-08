@@ -2,14 +2,14 @@ import { Controller, FieldValues, SubmitHandler } from "react-hook-form";
 import {
   useGetAcademicDepartmentsQuery,
   useGetAllSemestersQuery,
-} from "../../redux/features/admin/academicManagementApi";
-import { useAddStudentMutation } from "../../redux/features/admin/userManagement.api";
+} from "../../../redux/features/admin/academicManagementApi";
+import { useAddStudentMutation } from "../../../redux/features/admin/userManagement.api";
 import { Button, Col, Divider, Form, Input, Row } from "antd";
-import PHForm from "../../components/form/PHForm";
-import PHInput from "../../components/form/PHInput";
-import PHSelect from "../../components/form/PHSelect";
-import { bloodGroupOptions, genderOptions } from "../../constants/global";
-import PHDatePicker from "../../components/form/PHDatePicker";
+import PHForm from "../../../components/form/PHForm";
+import PHInput from "../../../components/form/PHInput";
+import PHSelect from "../../../components/form/PHSelect";
+import { bloodGroupOptions, genderOptions } from "../../../constants/global";
+import PHDatePicker from "../../../components/form/PHDatePicker";
 import { toast } from "sonner";
 
 // const studentDummyData = {
