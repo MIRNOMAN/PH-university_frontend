@@ -22,6 +22,18 @@ const StudentData = () => {
   ]);
 
   console.log({ isLoading, isFetching });
+
+  const metaData = studentData?.meta;
+
+  const tableData = studentData?.data?.map(
+    ({ _id, fullName, id, email, contactNo }) => ({
+      key: _id,
+      fullName,
+      id,
+      email,
+      contactNo,
+    })
+  );
     return (
         <div>
             <h1>stdent data</h1>
