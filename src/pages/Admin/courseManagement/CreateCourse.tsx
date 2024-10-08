@@ -2,6 +2,10 @@ import { toast } from "sonner";
 import { useAddCourseMutation, useGetAllCoursesQuery } from "../../../redux/features/admin/courseManagementApi";
 import { TResponse } from "../../../types/global";
 import { FieldValues, SubmitHandler } from "react-hook-form";
+import { Button, Col, Flex } from "antd";
+import PHForm from "../../../components/form/PHForm";
+import PHInput from "../../../components/form/PHInput";
+import PHSelect from "../../../components/form/PHSelect";
 
 const CreateCourse = () => {
     const [createCourse] = useAddCourseMutation();
@@ -21,7 +25,7 @@ const CreateCourse = () => {
           credits: Number(data.credits),
           isDeleted: false,
           preRequisiteCourses: data.preRequisiteCourses
-            ? data.preRequisiteCourses?.map((item) => ({
+            ? data.preRequisiteCourses?.map((item : any) => ({
                 course: item,
                 isDeleted: false,
               }))
@@ -43,9 +47,23 @@ const CreateCourse = () => {
         }
       };
     return (
-        <div>
-            <h1>this is create course</h1>
-        </div>
+        <Flex justify="center" align="center">
+        <Col span={6}>
+          <PHForm onSubmit={onSubmit}>
+            <PHInput type="text" name="title" label="Title" />
+            <PHInput type="text" name="prefix" label="Prefix" />
+            <PHInput type="text" name="code" label="Code" />
+            <PHInput type="text" name="credits" label="Credits" />
+            <PHSelect
+              mode="multiple"
+              options={preRequisiteCoursesOptions}
+              name="preRequisiteCourses"
+              label="preRequisiteCourses"
+            />
+            <Button htmlType="submit">Submit</Button>
+          </PHForm>
+        </Col>
+      </Flex>
     );
 };
 
