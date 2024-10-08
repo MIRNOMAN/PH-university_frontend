@@ -2,6 +2,8 @@ import { useState } from "react";
 import { TStudent } from "../../../types/userManagement.type";
 import { TQueryParam } from "../../../types/global";
 import { useGetAllStudentsQuery } from "../../../redux/features/admin/userManagement.api";
+import { Button, Space, TableColumnsType } from "antd";
+import { Link } from "react-router-dom";
 
 export type TTableData = Pick<
   TStudent,
@@ -34,6 +36,48 @@ const StudentData = () => {
       contactNo,
     })
   );
+
+  const columns: TableColumnsType<TTableData> = [
+    {
+      title: 'Name',
+      key: 'name',
+      dataIndex: 'fullName',
+    },
+
+    {
+      title: 'Roll No.',
+      key: 'id',
+      dataIndex: 'id',
+    },
+    {
+      title: 'Email',
+      key: 'email',
+      dataIndex: 'email',
+    },
+    {
+      title: 'Contact No.',
+      key: 'contactNo',
+      dataIndex: 'contactNo',
+    },
+    {
+      title: 'Action',
+      key: 'x',
+      render: (item) => {
+        console.log(item);
+        return (
+          <Space>
+            <Link to={`/admin/student-data/${item.key}`}>
+              <Button>Details</Button>
+            </Link>
+            <Button>Update</Button>
+            <Button>Block</Button>
+          </Space>
+        );
+      },
+      width: '1%',
+    },
+  ];
+
     return (
         <div>
             <h1>stdent data</h1>
