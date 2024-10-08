@@ -40,7 +40,7 @@ const RegisteredSemesters = () => {
   
     console.log(semesterId);
 
-    const handleStatusUpdate = (data) => {
+    const handleStatusUpdate = (data : any) => {
         const updateData = {
           id: semesterId,
           data: {
