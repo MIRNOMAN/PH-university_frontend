@@ -67,4 +67,23 @@ const AddFacultyModal = ({ facultyInfo }) => {
       label: item.fullName,
     }));
 
+    const handleSubmit = (data) => {
+        const facultyData = {
+          courseId: facultyInfo.key,
+          data,
+        };
+    
+        console.log(facultyData);
+    
+        addFaculties(facultyData);
+      };
+    
+      const showModal = () => {
+        setIsModalOpen(true);
+      };
+    
+      const handleCancel = () => {
+        setIsModalOpen(false);
+      };
+
 export default Courses;
