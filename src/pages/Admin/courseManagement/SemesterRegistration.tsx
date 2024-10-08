@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button, Col, Flex } from "antd";
 import { toast } from "sonner";
 import PHForm from "../../../components/form/PHForm";
@@ -5,6 +6,10 @@ import PHSelect from "../../../components/form/PHSelect";
 import PHDatePicker from "../../../components/form/PHDatePicker";
 import PHInput from "../../../components/form/PHInput";
 import { useGetAllSemestersQuery } from "../../../redux/features/admin/academicManagementApi";
+import { FieldValues, SubmitHandler } from "react-hook-form";
+import { useAddRegisteredSemesterMutation } from "../../../redux/features/admin/courseManagementApi";
+import { TResponse } from "../../../types/global";
+import { semesterStatusOptions } from "../../../constants/semesters";
 
 
 const SemesterRegistration = () => {
