@@ -1,5 +1,7 @@
 
-  import { baseApi } from '../../api/baseApi';
+  import { TCourse, TSemester } from '../../../types/courseManagement.type';
+import { TQueryParam, TResponseRedux } from '../../../types/global';
+import { baseApi } from '../../api/baseApi';
   
   const courseManagementApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
