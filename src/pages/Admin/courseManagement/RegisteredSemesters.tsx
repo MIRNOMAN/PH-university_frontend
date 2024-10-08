@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useGetAllRegisteredSemestersQuery, useUpdateRegisteredSemesterMutation } from "../../../redux/features/admin/courseManagementApi";
 import moment from 'moment';
 import { TSemester } from "../../../types/courseManagement.type";
-import { Button, Dropdown, TableColumnsType, Tag } from "antd";
+import { Button, Dropdown, Table, TableColumnsType, Tag } from "antd";
 
 export type TTableData = Pick<TSemester, 'startDate' | 'endDate' | 'status'>;
 
@@ -103,12 +103,29 @@ const RegisteredSemesters = () => {
           },
         },
       ];
+
+
+        // const onChange: TableProps<TTableData>['onChange'] = (
+  //   _pagination,
+  //   filters,
+  //   _sorter,
+  //   extra
+  // ) => {
+  //   if (extra.action === 'filter') {
+  //     const queryParams: TQueryParam[] = [];
+  //     setParams(queryParams);
+  //   }
+  // };
+
     
   
     return (
-        <div>
-             <h1>this is Registered Semesters</h1>
-        </div>
+        <Table
+      loading={isFetching}
+      columns={columns}
+      dataSource={tableData}
+      // onChange={onChange}
+    />
     );
 };
 
