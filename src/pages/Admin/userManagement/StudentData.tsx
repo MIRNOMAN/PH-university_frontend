@@ -1,4 +1,9 @@
+import { TStudent } from "../../../types/userManagement.type";
 
+export type TTableData = Pick<
+  TStudent,
+  'fullName' | 'id' | 'email' | 'contactNo'
+>;  
 
 const StudentData = () => {
     return (
