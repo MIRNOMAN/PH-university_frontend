@@ -1,7 +1,9 @@
-import { Table } from "antd";
+import { Button, Modal, Table } from "antd";
 import { useAddFacultiesMutation, useGetAllCoursesQuery } from "../../../redux/features/admin/courseManagementApi";
 import { useState } from "react";
 import { useGetAllFacultiesQuery } from "../../../redux/features/admin/userManagement.api";
+import PHForm from "../../../components/form/PHForm";
+import PHSelect from "../../../components/form/PHSelect";
 
 
 const Courses = () => {
@@ -85,5 +87,27 @@ const AddFacultyModal = ({ facultyInfo }) => {
       const handleCancel = () => {
         setIsModalOpen(false);
       };
-
+      
+      return (
+        <>
+          <Button onClick={showModal}>Add Faculty</Button>
+          <Modal
+            title="Basic Modal"
+            open={isModalOpen}
+            onCancel={handleCancel}
+            footer={null}
+          >
+            <PHForm onSubmit={handleSubmit}>
+              <PHSelect
+                mode="multiple"
+                options={facultiesOption}
+                name="faculties"
+                label="Faculty"
+              />
+              <Button htmlType="submit">Submit</Button>
+            </PHForm>
+          </Modal>
+        </>
+      );
+    };
 export default Courses;
