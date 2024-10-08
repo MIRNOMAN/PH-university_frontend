@@ -2,7 +2,7 @@ import { useState } from "react";
 import { TStudent } from "../../../types/userManagement.type";
 import { TQueryParam } from "../../../types/global";
 import { useGetAllStudentsQuery } from "../../../redux/features/admin/userManagement.api";
-import { Button, Space, TableColumnsType, TableProps } from "antd";
+import { Button, Pagination, Space, Table, TableColumnsType, TableProps } from "antd";
 import { Link } from "react-router-dom";
 
 export type TTableData = Pick<
@@ -101,9 +101,21 @@ const StudentData = () => {
   };
 
     return (
-        <div>
-            <h1>stdent data</h1>
-        </div>
+        <>
+        <Table
+          loading={isFetching}
+          columns={columns}
+          dataSource={tableData}
+          onChange={onChange}
+          pagination={false}
+        />
+        <Pagination
+          current={page}
+          onChange={(value) => setPage(value)}
+          pageSize={metaData?.limit}
+          total={metaData?.total}
+        />
+      </>
     );
 };
 
