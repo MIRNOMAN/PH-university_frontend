@@ -5,10 +5,11 @@ import { Button, Col, Flex } from "antd";
 import PHForm from "../../../components/form/PHForm";
 import PHSelectWithWatch from "../../../components/form/PHSelectWithWatch";
 import PHInput from "../../../components/form/PHInput";
-import { useGetAllCoursesQuery, useGetAllRegisteredSemestersQuery } from "../../../redux/features/admin/courseManagementApi";
+import { useCreateOfferedCourseMutation, useGetAllCoursesQuery, useGetAllRegisteredSemestersQuery, useGetCourseFacultiesQuery } from "../../../redux/features/admin/courseManagementApi";
 import PHTimePicker from "../../../components/form/PHTimePicker";
 import PHSelect from "../../../components/form/PHSelect";
 import moment from "moment";
+import { weekDaysOptions } from "../../../constants/global";
 
 
 const OfferCourse = () => {
@@ -56,7 +57,7 @@ const OfferCourse = () => {
     label: item.title,
   }));
 
-  const facultiesOptions = facultiesData?.data?.faculties?.map((item) => ({
+  const facultiesOptions = facultiesData?.data?.faculties?.map((item : any) => ({
     value: item._id,
     label: item.fullName,
   }));
