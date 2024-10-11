@@ -5,23 +5,20 @@ import { Button, Col, Flex } from "antd";
 import PHForm from "../../../components/form/PHForm";
 import PHSelectWithWatch from "../../../components/form/PHSelectWithWatch";
 import PHInput from "../../../components/form/PHInput";
+import { useGetAllRegisteredSemestersQuery } from "../../../redux/features/admin/courseManagementApi";
 
 
 const OfferCourse = () => {
-    const [id, setId] = useState('');
+  const [courseId, setCourseId] = useState('');
 
-  console.log('Inside parent component', id);
+  const [addOfferedCourse] = useCreateOfferedCourseMutation();
 
-  const { data: academicFacultyData } = useGetAcademicFacultiesQuery(undefined);
+  const { data: semesterRegistrationData } = useGetAllRegisteredSemestersQuery([
+    { name: 'sort', value: 'year' },
+    { name: 'status', value: 'UPCOMING' },
+  ]);
 
-  const academicSemesterOptions = academicFacultyData?.data?.map((item) => ({
-    value: item._id,
-    label: item.name,
-  }));
 
-  const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    console.log(data);
-  };
     return (
         <Flex justify="center" align="center">
       <Col span={6}>
