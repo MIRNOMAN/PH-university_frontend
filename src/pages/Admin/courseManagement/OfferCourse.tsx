@@ -1,6 +1,10 @@
 import { useState } from "react";
 import { useGetAcademicFacultiesQuery } from "../../../redux/features/admin/academicManagementApi";
 import { FieldValues, SubmitHandler } from "react-hook-form";
+import { Button, Col, Flex } from "antd";
+import PHForm from "../../../components/form/PHForm";
+import PHSelectWithWatch from "../../../components/form/PHSelectWithWatch";
+import PHInput from "../../../components/form/PHInput";
 
 
 const OfferCourse = () => {
@@ -19,9 +23,20 @@ const OfferCourse = () => {
     console.log(data);
   };
     return (
-        <div>
-               <h1>this is offer course</h1>
-        </div>
+        <Flex justify="center" align="center">
+      <Col span={6}>
+        <PHForm onSubmit={onSubmit}>
+          <PHSelectWithWatch
+            onValueChange={setId}
+            label="Academic Semester"
+            name="academicSemester"
+            options={academicSemesterOptions}
+          />
+          <PHInput disabled={!id} type="text" name="test" label="Test" />
+          <Button htmlType="submit">Submit</Button>
+        </PHForm>
+      </Col>
+    </Flex>
     );
 };
 
