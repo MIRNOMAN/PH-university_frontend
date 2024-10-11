@@ -18,6 +18,22 @@ const OfferCourse = () => {
     { name: 'status', value: 'UPCOMING' },
   ]);
 
+  const { data: academicFacultyData } = useGetAcademicFacultiesQuery(undefined);
+
+  const { data: academicDepartmentData } =
+    useGetAcademicDepartmentsQuery(undefined);
+
+  const { data: coursesData } = useGetAllCoursesQuery(undefined);
+
+  const { data: facultiesData, isFetching: fetchingFaculties } =
+    useGetCourseFacultiesQuery(courseId, { skip: !courseId });
+
+  const semesterRegistrationOptions = semesterRegistrationData?.data?.map(
+    (item) => ({
+      value: item._id,
+      label: `${item.academicSemester.name} ${item.academicSemester.year}`,
+    })
+  );
 
     return (
         <Flex justify="center" align="center">
