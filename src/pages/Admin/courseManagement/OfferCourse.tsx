@@ -35,6 +35,43 @@ const OfferCourse = () => {
     })
   );
 
+
+  const academicFacultyOptions = academicFacultyData?.data?.map((item) => ({
+    value: item._id,
+    label: item.name,
+  }));
+
+  const academicDepartmentOptions = academicDepartmentData?.data?.map(
+    (item) => ({
+      value: item._id,
+      label: item.name,
+    })
+  );
+
+  const courseOptions = coursesData?.data?.map((item) => ({
+    value: item._id,
+    label: item.title,
+  }));
+
+  const facultiesOptions = facultiesData?.data?.faculties?.map((item) => ({
+    value: item._id,
+    label: item.fullName,
+  }));
+
+  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+    const offeredCourseData = {
+      ...data,
+      maxCapacity: Number(data.maxCapacity),
+      section: Number(data.section),
+      startTime: moment(new Date(data.startTime)).format('HH:mm'),
+      endTime: moment(new Date(data.endTime)).format('HH:mm'),
+    };
+
+    const res = await addOfferedCourse(offeredCourseData);
+    console.log(res);
+  };
+
+
     return (
         <Flex justify="center" align="center">
       <Col span={6}>
