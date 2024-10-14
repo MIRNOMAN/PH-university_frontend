@@ -4,6 +4,9 @@ import PHInput from "../components/form/PHInput";
 import { useChangePasswordMutation } from "../redux/features/admin/userManagement.api";
 import { useAppDispatch } from "../redux/hooks";
 import { useNavigate } from "react-router-dom";
+import { FieldValues, SubmitHandler } from "react-hook-form";
+import { TResponse } from "../types/global";
+import { logout } from "../redux/features/auth/authSlice";
 
 
 const ChangePassword = () => {
