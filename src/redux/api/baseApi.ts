@@ -33,6 +33,10 @@ const beseQuerywithRefreshToken: BaseQueryFn<
   if (result?.error?.status === 404) {
     toast.error(result?.error?.data?.message);
   }
+
+  if (result?.error?.status === 403) {
+    toast.error(result?.error?.data?.message);
+  }
   // Check if the request failed due to an expired token
   if (result?.error?.status === 401) {
     // Attempt to refresh the token
