@@ -21,6 +21,22 @@ const StudentOfferedCourse = () => {
     return acc;
   }, {});
 
+
+  const modifiedData = Object.values(singleObject ? singleObject : {});
+
+  const handleEnroll = async (id) => {
+    const enrollData = {
+      offeredCourse: id,
+    };
+
+    const res = await enroll(enrollData);
+    console.log(res);
+  };
+
+  if (!modifiedData.length) {
+    return <p>No available courses</p>;
+  }
+
   return (
     <div>
       <h1>This is student offered course</h1>
