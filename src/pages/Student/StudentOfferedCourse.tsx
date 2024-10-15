@@ -78,3 +78,25 @@ const StudentOfferedCourse = () => {
 };
 
 export default StudentOfferedCourse;
+
+
+
+// [
+//   { course: { title: 'React' }, section: 1, _id: 'sdfasdfasdfas45345' },
+//   { course: { title: 'React' }, section: 2, _id: 'sdfasdfasdfas45345' },
+//   { course: { title: 'Redux' }, section: 1, _id: 'sdfasdfasdfas45345' },
+// ];
+
+// [
+//   {
+//     courseTitle: 'React',
+//     sections: [
+//       { section: 1, _id: 'ADFa4345basdfa' },
+//       { section: 2, _id: 'ADFa4345basdf3' },
+//     ],
+//   },
+//   {
+//     courseTitle: 'Redux',
+//     sections: [{ section: 1, _id: 'ADFa4345basdfa' }],
+//   },
+// ];
