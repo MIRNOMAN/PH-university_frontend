@@ -1,3 +1,8 @@
+
+type TCourse = {
+  [index: string]: any;
+};
+
 const StudentOfferedCourse = () => {
   return (
     <div>

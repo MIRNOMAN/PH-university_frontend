@@ -1,4 +1,5 @@
 import { TQueryParam, TResponseRedux } from '../../../types/global';
+import { TOfferedCourse } from '../../../types/studentCourse.type';
 import { baseApi } from '../../api/baseApi';
 
 const studentCourseApi = baseApi.injectEndpoints({
