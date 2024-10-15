@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useGetAllFacultyCoursesQuery } from "../../redux/features/faculty/facultyCourses.api";
+import { FieldValues, SubmitHandler } from "react-hook-form";
 
 
 export const MyCourses = () => {
@@ -18,6 +19,11 @@ export const MyCourses = () => {
     
   
     console.log(facultyCoursesData);
+
+    const onSubmit: SubmitHandler<FieldValues> = (data) => {
+        navigate(`/faculty/courses/${data.semesterRegistration}/${data.course}`);
+      };
+    
   return (
     <div>MyCourses</div>
   )
