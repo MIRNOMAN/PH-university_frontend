@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useGetAllFacultyCoursesQuery } from "../../redux/features/faculty/facultyCourses.api";
+import { Table } from "antd";
 
 
 export const MyStudents = () => {
@@ -48,6 +49,26 @@ export const MyStudents = () => {
       },
     ];
   return (
-    <div>MyStudents</div>
+    <Table columns={columns} dataSource={tableData} />
   )
 }
+
+
+
+const AddMarksModal = ({ studentInfo }) => {
+  console.log(studentInfo);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [addMark] = useAddMarkMutation();
+
+  const handleSubmit = async (data) => {
+    const studentMark = {
+      semesterRegistration: studentInfo.semesterRegistration,
+      offeredCourse: studentInfo.offeredCourse,
+      student: studentInfo.student,
+      courseMarks: {
+        classTest1: Number(data.classTest1),
+        midTerm: Number(data.midTerm),
+        classTest2: Number(data.classTest2),
+        finalTerm: Number(data.finalTerm),
+      },
+    };
