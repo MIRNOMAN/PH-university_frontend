@@ -8,8 +8,10 @@ export const MyStudents = () => {
     { name: 'semesterRegistration', value: registerSemesterId },
     { name: 'course', value: courseId },
 
+  ]);
 
-    console.log(facultyCoursesData);
+
+  console.log(facultyCoursesData);
 
     const tableData = facultyCoursesData?.data?.map(
       ({ _id, student, semesterRegistration, offeredCourse }) => ({
@@ -22,7 +24,29 @@ export const MyStudents = () => {
       })
     );
   
-  ]);
+    const columns = [
+      {
+        title: 'Name',
+        key: 'name',
+        dataIndex: 'name',
+      },
+      {
+        title: 'Roll',
+        key: 'roll',
+        dataIndex: 'roll',
+      },
+      {
+        title: 'Action',
+        key: 'x',
+        render: (item) => {
+          return (
+            <div>
+              <AddMarksModal studentInfo={item} />
+            </div>
+          );
+        },
+      },
+    ];
   return (
     <div>MyStudents</div>
   )
